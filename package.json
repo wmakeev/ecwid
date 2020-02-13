@@ -1,0 +1,43 @@
+{
+  "name": "@wmakeev/ecwid",
+  "version": "1.0.0",
+  "description": "Node.js Ecwid API wrapper typed with TypeScript",
+  "main": "dist/index.js",
+  "scripts": {
+    "format": "prettier --write \"src/**/*.ts\"",
+    "test": "blue-tape -r dotenv/config dist/tests/*.test.js && blue-tape -r dotenv/config dist/tests/**/*.test.js",
+    "build-dev": "tsc",
+    "build": "npm run format && rm -rf dist/* && tsc --build tsconfig.deploy.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wmakeev/ecwid.git"
+  },
+  "keywords": [
+    "ecwid",
+    "api",
+    "typings"
+  ],
+  "author": "Vitaliy V. Makeev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wmakeev/ecwid/issues"
+  },
+  "homepage": "https://github.com/wmakeev/ecwid#readme",
+  "dependencies": {
+    "lodash.isarray": "^4.0.0",
+    "lodash.isplainobject": "^4.0.6",
+    "node-fetch": "^2.6.0"
+  },
+  "devDependencies": {
+    "@types/blue-tape": "^0.1.33",
+    "@types/lodash.isarray": "^4.0.6",
+    "@types/lodash.isplainobject": "^4.0.6",
+    "@types/node": "^13.7.1",
+    "@types/node-fetch": "^2.5.4",
+    "blue-tape": "^1.0.0",
+    "dotenv": "^8.2.0",
+    "prettier": "^1.19.1",
+    "typescript": "^3.7.5"
+  }
+}
