@@ -4,6 +4,9 @@
   "description": "Node.js Ecwid API wrapper typed with TypeScript",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "format": "prettier --write \"src/**/*.ts\"",
     "test": "blue-tape -r dotenv/config dist/tests/*.test.js && blue-tape -r dotenv/config dist/tests/**/*.test.js",
