@@ -377,4 +377,51 @@ export interface Product {
     /** `true` if Ecwid can apply discounts to this product at checkout. `false` otherwise */
     discountsAllowed?: boolean;
 }
+export interface ImageDetails {
+    /** Image URL */
+    url: string;
+    /** Image width */
+    width: number;
+    /** Image height */
+    height: number;
+}
+/** [Category](https://api-docs.ecwid.com/reference/categories) */
+export interface Category {
+    /** Internal unique category ID */
+    id: number;
+    /** ID of the parent category, if any */
+    parentId: number;
+    /** Sort order of the category in the parent category subcategories list */
+    orderBy: number;
+    /** Category HD thumbnail URL resized to fit 800x800px */
+    hdThumbnailUrl: string;
+    /** Category thumbnail URL. The thumbnail size is specified in the store settings. Resized to fit 400x400px by default */
+    thumbnailUrl: string;
+    /** Category image URL. A resized original image to fit 1500x1500px */
+    imageUrl: string;
+    /** Link to the original (not resized) category image */
+    originalImageUrl: string;
+    /** Details of the category image */
+    originalImage: ImageDetails;
+    /** Category name */
+    name: string;
+    /** Thumbnail image data. The thumbnail size is specified in the store settings. Resized to fit 400x400px by default */
+    thumbnail: ImageDetails;
+    /** Available translations for category name */
+    nameTranslated: Translations;
+    /** URL of the category page in the store */
+    url: string;
+    /** Number of products in the category and its subcategories. Important: if new products are assigned or unassigned for this category, the changes to productCount value will apply after several minutes. */
+    productCount: number;
+    /** Number of enabled products in the category (excluding its subcategories) */
+    enabledProductCount: number;
+    /** The category description in HTML */
+    description: string;
+    /** Available translations for category description */
+    descriptionTranslated: Translations;
+    /** `true` if the category is enabled, `false` otherwise. Use `hidden_categories` in request to get disabled categories */
+    enabled: boolean;
+    /** IDs of products assigned to the category as they appear in Ecwid Control Panel > Catalog > Categories. To make this field appear in a response, send `productIds=true` in a request. */
+    productIds: Array<number>;
+}
 //# sourceMappingURL=types.d.ts.map
