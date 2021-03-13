@@ -119,6 +119,18 @@ export interface ShippingSettings {
     /** IDs of shipping methods which will only be shown when this product is in cart. No other shipping methods will be shown. IDs can be retrieved in [Store profile](https://api-docs.ecwid.com/reference-link/store-profile) */
     enabledMethods?: string[];
 }
+export declare type AttributeType = 'CUSTOM' | 'UPC' | 'BRAND' | 'GENDER' | 'AGE_GROUP' | 'COLOR' | 'SIZE' | 'PRICE_PER_UNIT' | 'UNITS_IN_PRODUCT';
+export declare type AttributeShow = 'NOTSHOW' | 'DESCR' | 'PRICE';
+export interface Attribute {
+    /** Attribute internal unique ID */
+    id: number;
+    /** Attribute title. Product attribute with an empty name field will also be returned. */
+    name: string;
+    /** Attribute type. There are user-defined attributes, general attributes and special 'price per unit’ attributes. The `type` field contains one of the following: `CUSTOM`, `UPC`, `BRAND`, `GENDER`, `AGE_GROUP`, `COLOR`, `SIZE`, `PRICE_PER_UNIT`, `UNITS_IN_PRODUCT` */
+    type: AttributeType;
+    /** Defines where to display the product attribute value:. Supported values: `NOTSHOW`, `DESCR`, `PRICE` */
+    show: AttributeShow;
+}
 /** [AttributeValue](https://api-docs.ecwid.com/reference/products#section-attributevalue) */
 export interface AttributeValue {
     /**	Unique attribute ID. See Product Classes for the information on attribute IDs. */
@@ -130,7 +142,7 @@ export interface AttributeValue {
     /** Attribute value */
     value?: string;
     /** **`READONLY`** Attribute type. There are user-defined attributes, general attributes and special 'price per unit’ attributes. The `type` field contains one of the following: `CUSTOM`, `UPC`, `BRAND`, `GENDER`, `AGE_GROUP`, `COLOR`, `SIZE`, `PRICE_PER_UNIT`, `UNITS_IN_PRODUCT` */
-    readonly type?: 'CUSTOM' | 'UPC' | 'BRAND' | 'GENDER' | 'AGE_GROUP' | 'COLOR' | 'SIZE' | 'PRICE_PER_UNIT' | 'UNITS_IN_PRODUCT';
+    readonly type?: AttributeType;
     /** **`READONLY`** Defines where to display the product attribute value:. Supported values: `NOTSHOW`, `DESCR`, `PRICE` */
     readonly show?: 'NOTSHOW' | 'DESCR' | 'PRICE';
 }
@@ -423,5 +435,15 @@ export interface Category {
     enabled: boolean;
     /** IDs of products assigned to the category as they appear in Ecwid Control Panel > Catalog > Categories. To make this field appear in a response, send `productIds=true` in a request. */
     productIds: Array<number>;
+}
+export interface ProductType {
+    /** Product class internal unique ID. Class with ID `0` is the default 'General' type assigned to all products by default */
+    id: number;
+    /** Product type name. Empty for the "General" type */
+    name?: string;
+    /** Google taxonomy associated with this type */
+    googleTaxonomy?: string;
+    /** Product type attributes */
+    attributes: Attribute[];
 }
 //# sourceMappingURL=types.d.ts.map
