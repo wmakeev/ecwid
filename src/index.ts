@@ -8,7 +8,7 @@ export interface EcwidOptions {
   endpoint: string
 }
 
-export default class Ecwid {
+export class Ecwid {
   constructor(
     private storeId: string,
     private token: string, // private options: {}

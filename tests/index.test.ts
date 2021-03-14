@@ -2,7 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import test from 'blue-tape'
 
-import Ecwid, { Product, CreateStatus } from '../src'
+import { Ecwid, Product, CreateStatus } from '../src'
 
 const {
   ECWID_STORE_ID,

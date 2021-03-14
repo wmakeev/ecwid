@@ -64,5 +64,5 @@ class Ecwid {
         });
     }
 }
-exports.default = Ecwid;
+exports.Ecwid = Ecwid;
 //# sourceMappingURL=index.js.map

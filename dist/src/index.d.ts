@@ -6,7 +6,7 @@ export * from './types';
 export interface EcwidOptions {
     endpoint: string;
 }
-export default class Ecwid {
+export declare class Ecwid {
     private storeId;
     private token;
     private options;
