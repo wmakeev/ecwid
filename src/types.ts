@@ -4,6 +4,12 @@ export interface CreateStatus {
   id: number
 }
 
+/** [UpdateStatus](https://api-docs.ecwid.com/reference/products#updatestatus) */
+export interface UpdateStatus {
+  /** The number of updated products (1 or 0 depending on whether the update was successful) */
+  updateCount: number
+}
+
 /** [Error](https://api-docs.ecwid.com/reference/products#section-errors). In case of error, Ecwid responds with an error HTTP status code and, optionally, JSON-formatted body containing error description */
 export interface ResponseError {
   /** Error message */
