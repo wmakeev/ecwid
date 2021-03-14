@@ -13,6 +13,23 @@ export interface ResponseError {
   errorCode: string
 }
 
+export interface SearchResult<T> {
+  /** The total number of found items (might be more than the number of returned items) */
+  total: number
+
+  /** The total number of the items returned in this batch */
+  count: number
+
+  /** Offset from the beginning of the returned items list (for paging) */
+  offset: number
+
+  /** Maximum number of returned items. Maximum allowed value: 100. Default value: 100 */
+  limit: number
+
+  /** Items list */
+  items: T[]
+}
+
 /** [BatchRequest](https://api-docs.ecwid.com/reference/batch-requests#section-batchrequest) */
 export interface BatchRequest {
   /** Set an optional request ID so you can find a specific request easier in the response */
