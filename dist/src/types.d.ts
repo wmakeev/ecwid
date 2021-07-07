@@ -405,6 +405,8 @@ export interface Product {
     readonly isGiftCard?: boolean;
     /** `true` if Ecwid can apply discounts to this product at checkout. `false` otherwise */
     discountsAllowed?: boolean;
+    /** Short product description for categories or search pages. */
+    subtitle?: string;
 }
 export interface ImageDetails {
     /** Image URL */
