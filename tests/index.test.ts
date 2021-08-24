@@ -1,5 +1,8 @@
+import 'isomorphic-fetch'
+
 import fs from 'fs'
 import path from 'path'
+import fetch from 'node-fetch'
 import test from 'blue-tape'
 
 import { Ecwid, Product, CreateStatus } from '../src'
@@ -13,7 +16,7 @@ const {
 const PRODUCT_ID = Number(ECWID_TEST_PRODUCT_ID)
 
 test('Ecwid#GET (product)', async t => {
-  const ecwid = new Ecwid(ECWID_STORE_ID!, ECWID_TOKEN_SECRET!)
+  const ecwid = new Ecwid(ECWID_STORE_ID!, ECWID_TOKEN_SECRET!, { fetch })
 
   const product = await ecwid.GET<Product>(`products/${PRODUCT_ID}`)
 
@@ -42,7 +45,7 @@ test('Ecwid#POST (image)', async t => {
 test('Ecwid Error', t => {
   t.plan(1)
 
-  const ecwid = new Ecwid(ECWID_STORE_ID!, ECWID_TOKEN_SECRET!)
+  const ecwid = new Ecwid(ECWID_STORE_ID!, ECWID_TOKEN_SECRET!, { fetch })
 
   ecwid.GET<Product>('product/160000000').catch(err => {
     t.equal(err.message, '404 File not found', 'should return error')

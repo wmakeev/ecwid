@@ -1,26 +1,48 @@
-import fetch, { RequestInit } from 'node-fetch'
 import qs, { ParsedUrlQueryInput } from 'querystring'
 import { isPojo, Pojo } from './tools'
 
 export * from './types'
 
-export interface EcwidOptions {
-  endpoint: string
+type FetchApiRequestOptions = {
+  method?: string
+  body?: string
+  headers?: { [key: string]: string }
 }
 
+type FetchAPI = (
+  url: string,
+  init?: FetchApiRequestOptions
+) => Promise<{
+  status: number
+  statusText: string
+  text: () => Promise<string>
+}>
+
+export interface EcwidOptions {
+  endpoint?: string
+  fetch?: FetchAPI
+}
+
+const ECWID_API_ENDPOINT = 'app.ecwid.com/api/v3'
+
 export class Ecwid {
+  private options: EcwidOptions
+
   constructor(
     private storeId: string,
     private token: string, // private options: {}
-    private options: EcwidOptions = {
-      endpoint: 'app.ecwid.com/api/v3'
+    options?: EcwidOptions
+  ) {
+    this.options = {
+      endpoint: ECWID_API_ENDPOINT,
+      ...options
     }
-  ) {}
+  }
 
   request<T>(
     path: string,
     params: ParsedUrlQueryInput = {},
-    options: RequestInit = {}
+    options: FetchApiRequestOptions = {}
   ) {
     const endpoint = this.options.endpoint
     const urlQuery: ParsedUrlQueryInput = {
@@ -30,15 +52,25 @@ export class Ecwid {
 
     const queryString = qs.encode(urlQuery)
 
-    return fetch(`https://${endpoint}/${this.storeId}/${path}?${queryString}`, {
-      method: 'GET',
-      ...options,
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-        'Accept-Encoding': 'gzip',
-        ...options.headers
+    const fetchApi: FetchAPI | null =
+      this.options.fetch ?? (typeof fetch !== 'undefined' ? fetch : null)
+
+    if (!fetchApi) {
+      throw new Error('Ecwid: FetchAPI not found')
+    }
+
+    return fetchApi(
+      `https://${endpoint}/${this.storeId}/${path}?${queryString}`,
+      {
+        method: 'GET',
+        ...options,
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+          'Accept-Encoding': 'gzip',
+          ...options.headers
+        }
       }
-    })
+    )
       .then(res => {
         if (res.status < 200 || res.status > 299) {
           throw new Error(`${res.status} ${res.statusText}`)
