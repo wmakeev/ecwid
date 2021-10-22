@@ -280,7 +280,7 @@ export interface FavoritesStats {
 /** [ProductMedia](https://api-docs.ecwid.com/reference/products#section-productmedia) */
 export interface ProductMedia {
   /** Images of this product and their details */
-  images: ProductImage
+  images: ProductImage[]
 }
 
 /** [ProductImage](https://api-docs.ecwid.com/reference/products#section-productimage) */
